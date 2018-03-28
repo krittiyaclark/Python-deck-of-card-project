@@ -7,10 +7,6 @@ class Card:
 		return "{} of {}".format(self.value, self.suit)
 		# return f"{self.value} of {self.suit}"
 
-# c = Card("A", "Hearts")
-# c2 = Card("10", "Dimonds")
-# c3 = Card("K", "Spades")
-# print(c, c2, c3)
 
 class Deck:
 	def __init__(self):
@@ -22,7 +18,7 @@ class Deck:
 		# for suit in suits:
 		# 	for value in values:
 		# 		self.cards.append(Card(value, suits))
-		print(self.cards)
+		# print(self.cards)
 
 	def __repr__(self):
 		return f"Deck of {self.count()} cards"
@@ -30,5 +26,19 @@ class Deck:
 	def count(self):
 		return len(self.cards)
 
+	def _deal(self, num):
+		count = self.count()
+		actual = min([count,num])
+		if count == 0:
+			raise ValueError("All cards have been dealt")
+		cards = self.cards[-actual:]
+		self.cards = self.cards[:-actual]
+		return cards
+
+
 d = Deck()
-print(d)
+print(d._deal(52))
+print(d.count())
+print(d._deal(3))
+
+
